@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MindfulBuy - Solusi Belanja Bijak & Kontrol Finansial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <style>
+        /* RESET & GENERAL STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #fcfdfc;
+            color: #333;
+        }
+
+        /* NAVBAR STYLING */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2d4036;
+        }
+
+        .navbar .logo span {
+            color: #4A6B5D;
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            color: #4A6B5D;
+        }
+
+        .navbar .login-btn {
+            background-color: #4A6B5D;
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .navbar .login-btn:hover {
+            background-color: #385247;
+        }
+
+        /* HERO SECTION STYLING */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 5%;
+            background: linear-gradient(135deg, #f4f7f5 0%, #e8efe9 100%);
+            gap: 40px;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 36px;
+            color: #2d4036;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .hero-content p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            max-width: 450px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 18px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-box button {
+            background-color: #4A6B5D;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-box button:hover {
+            background-color: #385247;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 480px;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 28px;
+            color: #2d4036;
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #2d4036;
+            color: #d1e0d7;
+            font-size: 14px;
+            margin-top: 50px;
+        }
+
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            .search-box {
+                margin: 0 auto;
+            }
+            .navbar ul {
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">Mindful<span>Buy</span></div>
+
+        <ul>
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#fitur">Fitur</a></li>
+            <li><a href="#produk">Produk</a></li>
+            <li><a href="#edukasi">Edukasi</a></li>
+            <li><a href="#testimoni">Testimoni</a></li>
+            <?php if (isset($_SESSION['login'])): ?>
+                <li><a href="index.php?page=profile" class="login-btn">Profil Saya</a></li>
+            <?php else: ?>
+                <li><a href="index.php?page=login" class="login-btn">Login</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="beranda">
+        <div class="hero-content">
+            <h1>Belanja Bijak, Bebas dari Jeratan Promo Impulsif</h1>
+            <p>
+                MindfulBuy membantu kamu mengontrol keuangan dari godaan <i>Flash Sale</i> dan diskon tak terencana. 
+                Nikmati pengalaman belanja yang rasional dan terencana.
+            </p>
+
+            <div class="search-box">
+                <input type="text" placeholder="Cari barang kebutuhanmu...">
+                <button>Cari</button>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <img src="assets/images/hero-banner.jpg" alt="Mindful Shopping Illustration">
+        </div>
+    </section>
+
+    <!-- FITUR UTAMA -->
+    <section class="destinasi" id="fitur" style="padding: 50px 20px;">
+        <div class="section-title">
+            <h2>Fitur Penyelamat Keuangan</h2>
+            <p>Solusi dirancang khusus untuk meredam pemborosan akibat racun promo Shopee & TikTok</p>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1100px; margin: 0 auto;">
+            
+            <div style="flex: 1; min-width: 250px; background: #ffffff; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.08);">
+                <div style="background: #f4f7f5; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <img src="assets/images/icons/cooling-off.svg" alt="Cooling Off" style="width: 50px; height: 50px; display: block; margin: 0 auto;">
+                </div>
+                <h3 style="margin-bottom: 8px; color: #333;">Cooling-off Period</h3>
+                <p style="font-size: 14px; color: #666;">Fitur jeda 24 jam sebelum checkout untuk memastikan kamu benar-benar butuh barangnya.</p>
+            </div>
+
+            <div style="flex: 1; min-width: 250px; background: #ffffff; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.08);">
+                <div style="background: #f4f7f5; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <img src="assets/images/icons/budget.svg" alt="Budget Control" style="width: 50px; height: 50px; display: block; margin: 0 auto;">
+                </div>
+                <h3 style="margin-bottom: 8px; color: #333;">Budget Limit Control</h3>
+                <p style="font-size: 14px; color: #666;">Sistem peringatan otomatis jika belanjaanmu melebihi batasan anggaran bulanan.</p>
+            </div>
+
+            <div style="flex: 1; min-width: 250px; background: #ffffff; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.08);">
+                <div style="background: #f4f7f5; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <img src="assets/images/icons/cooling-off.svg" alt="Mindful Filter" style="width: 50px; height: 50px; display: block; margin: 0 auto;">
+                </div>
+                <h3 style="margin-bottom: 8px; color: #333;">Mindful Filter</h3>
+                <p style="font-size: 14px; color: #666;">Menghilangkan trik visual promo palsu agar kamu fokus pada harga asli barang.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- KATALOG PRODUK -->
+    <section class="paket" id="produk" style="padding: 50px 20px; max-width: 1100px; margin: 0 auto;">
+        <div class="section-title">
+            <h2>Katalog Produk Pilihan</h2>
+            <p>Pilih barang sesuai kebutuhan rasionalmu hari ini</p>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 25px;">
+            
+            <!-- CARD PRODUK 1 -->
+            <div style="flex: 1; min-width: 280px; max-width: 340px; background: #ffffff; border-radius: 12px; padding: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <span style="background: #e8f5e9; color: #2e7d32; font-size: 12px; font-weight: bold; padding: 4px 10px; border-radius: 20px; display: inline-block; margin-bottom: 10px;">Rekomendasi</span>
+                    <img src="assets/images/products/journal.jpg" alt="Mindful Journal" style="width: 100% !important; height: 180px !important; object-fit: cover !important; border-radius: 8px !important; margin-bottom: 12px !important; display: block;">
+                    <h3 style="font-size: 18px; margin: 5px 0;">Mindful Journal</h3>
+                    <p style="color: #4A6B5D; font-weight: bold; font-size: 16px; margin-bottom: 10px;">Rp 85.000</p>
+                    <ul style="padding-left: 18px; font-size: 13px; color: #555; margin-bottom: 15px; list-style: disc;">
+                        <li>Kategori: Alat Tulis</li>
+                        <li>Status Anggaran: <b style="color: green;">Aman</b></li>
+                        <li>Estimasi Pemakaian: Harian</li>
+                    </ul>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <a href="index.php?page=login" class="login-btn" style="flex: 1; text-align: center; text-decoration: none; padding: 8px; border-radius: 6px; font-size: 13px;">Beli Sekarang</a>
+                    <a href="#" style="flex: 1; text-align: center; text-decoration: none; background: #d3beaa; color: white; padding: 8px; border-radius: 6px; font-size: 13px; font-weight: bold;">Tahan (Jeda)</a>
+                </div>
+            </div>
+
+            <!-- CARD PRODUK 2 -->
+            <div style="flex: 1; min-width: 280px; max-width: 340px; background: #ffffff; border-radius: 12px; padding: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <span style="background: #e8f5e9; color: #2e7d32; font-size: 12px; font-weight: bold; padding: 4px 10px; border-radius: 20px; display: inline-block; margin-bottom: 10px;">Terfavorit</span>
+                    <img src="assets/images/products/tumbler.jpg" alt="Botol Minum Tumbler" style="width: 100% !important; height: 180px !important; object-fit: cover !important; border-radius: 8px !important; margin-bottom: 12px !important; display: block;">
+                    <h3 style="font-size: 18px; margin: 5px 0;">Botol Minum Tumbler</h3>
+                    <p style="color: #4A6B5D; font-weight: bold; font-size: 16px; margin-bottom: 10px;">Rp 120.000</p>
+                    <ul style="padding-left: 18px; font-size: 13px; color: #555; margin-bottom: 15px; list-style: disc;">
+                        <li>Kategori: Gaya Hidup</li>
+                        <li>Status Anggaran: <b style="color: green;">Aman</b></li>
+                        <li>Estimasi Pemakaian: Harian</li>
+                    </ul>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <a href="index.php?page=login" class="login-btn" style="flex: 1; text-align: center; text-decoration: none; padding: 8px; border-radius: 6px; font-size: 13px;">Beli Sekarang</a>
+                    <a href="#" style="flex: 1; text-align: center; text-decoration: none; background: #d3beaa; color: white; padding: 8px; border-radius: 6px; font-size: 13px; font-weight: bold;">Tahan (Jeda)</a>
+                </div>
+            </div>
+
+            <!-- CARD PRODUK 3 -->
+            <div style="flex: 1; min-width: 280px; max-width: 340px; background: #ffffff; border-radius: 12px; padding: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <span style="background: #fff3e0; color: #e65100; font-size: 12px; font-weight: bold; padding: 4px 10px; border-radius: 20px; display: inline-block; margin-bottom: 10px;">Cek Kebutuhan</span>
+                    <img src="assets/images/products/totebag.jpg" alt="Canvas Tote Bag" style="width: 100% !important; height: 180px !important; object-fit: cover !important; border-radius: 8px !important; margin-bottom: 12px !important; display: block;">
+                    <h3 style="font-size: 18px; margin: 5px 0;">Canvas Tote Bag</h3>
+                    <p style="color: #4A6B5D; font-weight: bold; font-size: 16px; margin-bottom: 10px;">Rp 65.000</p>
+                    <ul style="padding-left: 18px; font-size: 13px; color: #555; margin-bottom: 15px; list-style: disc;">
+                        <li>Kategori: Fashion</li>
+                        <li>Status Anggaran: <b style="color: orange;">Mendekati Limit</b></li>
+                        <li>Estimasi Pemakaian: Akhir Pekan</li>
+                    </ul>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <a href="index.php?page=login" class="login-btn" style="flex: 1; text-align: center; text-decoration: none; padding: 8px; border-radius: 6px; font-size: 13px;">Beli Sekarang</a>
+                    <a href="#" style="flex: 1; text-align: center; text-decoration: none; background: #d3beaa; color: white; padding: 8px; border-radius: 6px; font-size: 13px; font-weight: bold;">Tahan (Jeda)</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION EDUKASI -->
+    <section class="edukasi" id="edukasi" style="padding: 50px 20px; background: #f9fbf9;">
+        <div class="section-title">
+            <h2>Edukasi Mindful Shopping</h2>
+            <p>Tips & Trik Mengatasi Manipulasi Psikologis Promo Marketplace</p>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; max-width: 1100px; margin: 0 auto;">
+            <div style="flex: 1; min-width: 280px; max-width: 340px; background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.06); border-top: 4px solid #4A6B5D;">
+                <span style="font-size: 12px; color: #4A6B5D; font-weight: bold;">LITERASI KEUANGAN</span>
+                <h3 style="font-size: 18px; margin: 10px 0; color: #222;">Aturan 24 Jam Sebelum Checkout</h3>
+                <p style="font-size: 14px; color: #666; line-height: 1.6;">Gunakan aturan jeda 24 jam untuk meredakan dorongan hormon dopamin yang membuatmu ingin belanja impulsif saat melihat diskon.</p>
+            </div>
+
+            <div style="flex: 1; min-width: 280px; max-width: 340px; background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.06); border-top: 4px solid #4A6B5D;">
+                <span style="font-size: 12px; color: #4A6B5D; font-weight: bold;">KONTROL DIRI</span>
+                <h3 style="font-size: 18px; margin: 10px 0; color: #222;">Membedakan Need vs Want</h3>
+                <p style="font-size: 14px; color: #666; line-height: 1.6;">Tanyakan 3 hal ini sebelum beli: Apakah ini kebutuhan pokok? Berapa kali akan digunakan? Apakah ada anggaran yang tersisa?</p>
+            </div>
+
+            <div style="flex: 1; min-width: 280px; max-width: 340px; background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.06); border-top: 4px solid #4A6B5D;">
+                <span style="font-size: 12px; color: #4A6B5D; font-weight: bold;">BEBAS MANIPULASI</span>
+                <h3 style="font-size: 18px; margin: 10px 0; color: #222;">Bahaya Trik Flash Sale</h3>
+                <p style="font-size: 14px; color: #666; line-height: 1.6;">Fitur timer dan 'stok terbatas' dirancang marketplace untuk memicu rasa panik (FOMO). Tetap tenang dan hitung harga aslinya.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONI PENGGUNA -->
+    <section class="testimoni" id="testimoni" style="padding: 50px 20px;">
+        <div class="section-title">
+            <h2>Kata Mereka Tentang MindfulBuy</h2>
+            <p>Pengalaman pengguna yang berhasil lepas dari perilaku belanja impulsif</p>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 1000px; margin: 0 auto;">
+            <div style="flex: 1; min-width: 280px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.06);">
+                <p style="font-style: italic; color: #555; font-size: 14px;">"Dulu sering khilaf beli barang diskon di TikTok Shop yang akhirnya ga dipakai. Sejak ada fitur Cooling-off MindfulBuy, tabungan gajiku aman!"</p>
+                <h4 style="margin-top: 15px; color: #4A6B5D;">Budi, Mahasiswa</h4>
+            </div>
+
+            <div style="flex: 1; min-width: 280px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.06);">
+                <p style="font-style: italic; color: #555; font-size: 14px;">"Fitur Limit Anggarannya membantu banget buat mengontrol belanja bulanan. Nggak ada lagi cerita tanggal tua makan tabungan."</p>
+                <h4 style="margin-top: 15px; color: #4A6B5D;">Siti, First Jobber</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 MindfulBuy - Platform E-Commerce Solusi Tantangan Finansial. All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>
